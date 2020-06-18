@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class UserManager(BaseUserManager):
     
-    def create_user(self,email,username,password):
+    def create_user(self,email,username,password,commit=True):
 
         if not email:
             raise ValueError(_('The Email must be set'))
@@ -33,3 +33,6 @@ class UserManager(BaseUserManager):
         user.is_superuser = True
         user.save(using=self._db)
         return user
+
+
+        
