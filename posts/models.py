@@ -11,8 +11,8 @@ class Post(models.Model):
 
 
 class Category(models.Model):
-     name= models.CharField(max_length=30)
-     subscribers = models.IntegerField()
+    name= models.CharField(max_length=30)
+    subscribers = models.IntegerField()
 
 
 
