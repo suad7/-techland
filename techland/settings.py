@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'posts',
     'authentication',
     'pyuploadcare.dj',
+    'rest_framework',
 
 ]
 
@@ -112,6 +113,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
