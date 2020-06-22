@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from .email import send_welcome_email
 
-from .models import User
+from .models import User, Profile
 
 
 class UserAdmin(BaseUserAdmin):
@@ -29,3 +29,4 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(User,UserAdmin)
+admin.site.register(Profile)
