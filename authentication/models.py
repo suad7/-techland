@@ -6,7 +6,6 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class User(AbstractBaseUser,PermissionsMixin):
-    
     username = models.CharField(max_length=30,unique=True)
     email = models.EmailField(_('email address'), unique=True)
     is_staff = models.BooleanField(default=False)
