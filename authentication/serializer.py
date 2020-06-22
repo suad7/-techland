@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer,CharField,EmailField
 from django.db.models import Q
-from .models import User
+from .models import User, Profile
+from django.core.exceptions import ValidationError
 
 
 
@@ -70,3 +71,20 @@ class UserLoginSerializer(serializers.ModelSerializer):
 
         data['token'] = '123456789' 
         return data
+
+class ProfileSerializer(serializers.ModelSerializer):
+    ''' 
+    Class that defines profile serializer
+    '''
+    class Meta:
+        model = Profile
+        fields = ('user', 'bio' ,'picture')
+    
+
+class ProfileSerializerwithoutUser(serializers.ModelSerializer):
+    '''
+    Class that defines profile serializer without user
+    '''
+    class Meta:
+        model = Profile
+        fields = ('bio' ,'picture')
