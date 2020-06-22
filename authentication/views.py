@@ -95,8 +95,8 @@ class ProfileDetails(RetrieveAPIView, UpdateAPIView):
         '''
 
         profile = self.get_profile(pk)
-        serializers = ProfileSerializer(profile, request.data)
-        if serializers.is_valid():
-            rem_field = serializers.validated_data.pop("user", None)
-            return Response(serializers.data)
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = ProfileSerializerwithoutUser(instance=profile, data = request.data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            profile = serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
