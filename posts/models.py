@@ -11,9 +11,14 @@ class Post(models.Model):
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     author=models.ForeignKey('authentication.User', on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.title
 
 class Category(models.Model):
-     name= models.CharField(max_length=30)
+    name= models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
 
 
 

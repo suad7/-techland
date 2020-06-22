@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'posts',
     'authentication',
     'pyuploadcare.dj',
+    'rest_framework',
 
 ]
 
