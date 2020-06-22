@@ -19,8 +19,23 @@ class Category(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey('Post', on_delete=models.CASCADE)
-    comment = models.TextField() 
+    content = models.TextField() 
     created = models.DateTimeField(auto_now_add=True)
     author=models.ForeignKey('authentication.User', on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', null=True, blank=True,on_delete=models.CASCADE)
 
 
+    def  __str__(self):
+        return str(self.content)
+
+    
+    def children(self):
+        return Comment.objects.filter(parent=self)
+
+    
+
+    @property
+    def is_parent(self):
+        if self.parent is not None:
+            return False
+        return True
