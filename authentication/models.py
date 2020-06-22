@@ -12,10 +12,11 @@ class User(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    is_student = models.BooleanField(default=True)
 
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['email']
 
     objects = UserManager()
 
@@ -23,11 +24,14 @@ class User(AbstractBaseUser,PermissionsMixin):
     def __str__(self):
         return self.username
 
-
 class Profile(models.Model):
     user = models.OneToOneField('authentication.User', on_delete=models.CASCADE)
     bio = models.TextField()
     picture = ImageField(blank=True, manual_crop='')
+
+    def __str__(self):
+        return self.user.username
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender,instance,created, **kwargs):
