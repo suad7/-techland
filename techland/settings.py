@@ -12,20 +12,32 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+
+
+SECRET_KEY = '123456789'
+DEBUG = True
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('NAME', 'postgres'),
+        'USER': os.environ.get('USER', 'postgres'),
+        'PASSWORD': os.environ.get('PASSWORD', 'password'),
+        # 'HOST': os.environ.get('DB_HOST', 'localhost'),
+        # 'PORT': os.environ.get('DB_PORT', '5432'),
+        # 'TEST': {
+        #     'NAME': 'test_<app_name>'
+        # }
+    },
+}
+
+
+ALLOWED_HOSTS = '*'
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(%ckxvxg+2j@)4(l4#w+(k7gfn#jae#cto+an)4b_&sjb+a2w0'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -41,6 +53,8 @@ INSTALLED_APPS = [
     'authentication',
     'pyuploadcare.dj',
     'rest_framework',
+    'comment',
+    
 
 ]
 
@@ -74,8 +88,8 @@ TEMPLATES = [
 
 
 UPLOADCARE = {
-    'pub_key': '0ba15bb355704669762b',
-    'secret': '7426d10b6c514f990a31',
+    'pub_key': '557ba8f5e78026902bd0',
+    'secret': ' 48f6b1bf0063508ad239',
 }
 
 
@@ -84,15 +98,6 @@ WSGI_APPLICATION = 'techland.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('NAME'),
-        'USER': os.environ.get('USER'),
-        'PASSWORD': os.environ.get('PASSWORD')
-    }
-}
 
 
 # Password validation
@@ -142,4 +147,6 @@ STATIC_URL = '/static/'
 
 
 AUTH_USER_MODEL = 'authentication.User'
+
+LOGIN_URL = 'login'
 

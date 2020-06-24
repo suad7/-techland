@@ -1,6 +1,10 @@
 from django.db import models
 from pyuploadcare.dj.models import ImageField
 from authentication.models import User
+from comment.models import Comment
+from django.contrib.contenttypes.fields import GenericRelation
+
+
 
 
 class Post(models.Model):
@@ -10,32 +14,16 @@ class Post(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     author=models.ForeignKey('authentication.User', on_delete=models.CASCADE)
+    comments = GenericRelation(Comment)
 
+    def __str__(self):
+        return self.title
 
 class Category(models.Model):
-     name= models.CharField(max_length=30)
+    name= models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
 
 
 
-class Comment(models.Model):
-    post = models.ForeignKey('Post', on_delete=models.CASCADE)
-    content = models.TextField() 
-    created = models.DateTimeField(auto_now_add=True)
-    author=models.ForeignKey('authentication.User', on_delete=models.CASCADE)
-    parent = models.ForeignKey('self', null=True, blank=True,on_delete=models.CASCADE)
-
-
-    def  __str__(self):
-        return str(self.content)
-
-    
-    def children(self):
-        return Comment.objects.filter(parent=self)
-
-    
-
-    @property
-    def is_parent(self):
-        if self.parent is not None:
-            return False
-        return True
